@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="am" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ሽምግልና | ኦርቶዶክስ ጥሪ</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif+Ethiopic:wght@400;500;600;700&family=Noto+Sans+Ethiopic:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="ወደ ሽምግልና ሥነ ሥርዓታችን ጋብዘናችኋል።">
+</head>
+
+<body class="envelope-active">
+
+    <!-- Particle Canvas -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Envelope Opening Screen -->
+    <div id="envelope-overlay" class="envelope-overlay">
+
+        <!-- Ambient light rays -->
+        <div class="light-rays">
+            <div class="ray"></div>
+            <div class="ray"></div>
+            <div class="ray"></div>
+            <div class="ray"></div>
+            <div class="ray"></div>
+        </div>
+
+        <div class="envelope-scene">
+
+            <div class="envelope-wrapper" id="envelope-wrapper">
+
+                <!-- The 3D Envelope -->
+                <div class="envelope" id="envelope">
+
+                    <!-- Back -->
+                    <div class="env-back">
+                        <div class="env-back-fold-left"></div>
+                        <div class="env-back-fold-right"></div>
+                        <div class="env-back-fold-bottom"></div>
+                    </div>
+
+                    <!-- Invitation Card -->
+                    <div class="env-card" id="env-card">
+                        <div class="card-inner">
+                            <span class="card-label">ጋብዘናችኋል</span>
+                            <span class="card-names">ሰናይት &amp; አበበ</span>
+                            <span class="card-date">መስከረም ፲፭ ቀን ፳፻፲፱</span>
+                        </div>
+                    </div>
+
+                    <!-- Flap -->
+                    <div class="env-flap" id="env-flap">
+                        <div class="flap-inner"></div>
+                    </div>
+
+                    <!-- Front -->
+                    <div class="env-front">
+                        <div class="env-address">
+                            <span class="addr-to">ለ·</span>
+                            <span class="addr-name">የተወደዳችሁ እንግዳ</span>
+                        </div>
+                    </div>
+
+                </div><!-- /envelope -->
+
+                <!-- Wax Seal Button -->
+                <div class="wax-seal-wrap" id="wax-seal-wrap">
+                    <button class="wax-seal" id="open-invitation" aria-label="ክፈቱ">
+                        <div class="seal-ring"></div>
+                        <div class="seal-ring seal-ring-2"></div>
+                        <div class="seal-emblem">
+                            <!-- Ethiopian Orthodox Cross (Lalibela style) -->
+                            <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Vertical bar -->
+                                <rect x="27" y="4" width="6" height="52" fill="rgba(255,230,140,0.95)" rx="1" />
+                                <!-- Horizontal bar -->
+                                <rect x="8" y="19" width="44" height="6" fill="rgba(255,230,140,0.95)" rx="1" />
+                                <!-- Upper left secondary vertical -->
+                                <rect x="18" y="8" width="4" height="15" fill="rgba(255,220,100,0.75)" rx="0.8" />
+                                <!-- Upper right secondary vertical -->
+                                <rect x="38" y="8" width="4" height="15" fill="rgba(255,220,100,0.75)" rx="0.8" />
+                                <!-- Upper left horizontal connector -->
+                                <rect x="8" y="12" width="10" height="3" fill="rgba(255,220,100,0.7)" rx="0.8" />
+                                <!-- Upper right horizontal connector -->
+                                <rect x="42" y="12" width="10" height="3" fill="rgba(255,220,100,0.7)" rx="0.8" />
+                            </svg>
+                        </div>
+                        <span class="seal-text">ክፈቱ</span>
+                        <div class="seal-glow-pulse"></div>
+                    </button>
+                    <p class="seal-hint">ለመክፈት ሲሉን ይጫኑ</p>
+                </div>
+
+            </div><!-- /envelope-wrapper -->
+
+        </div><!-- /envelope-scene -->
+
+    </div><!-- /envelope-overlay -->
+
+    <!-- Parallax Background -->
+    <div class="bg-image"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="#welcome">እንኳን ደህና መጡ</a></li>
+            <li><a href="#details">ዝርዝሮች</a></li>
+            <li><a href="#timeline">መርሃ ግብር</a></li>
+            <li><a href="#rsvp" class="rsvp-btn">ምላሽ ላኩ</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+
+        <!-- Hero Section -->
+        <section id="welcome" class="hero fade-in">
+            <div class="glass-container">
+                <span class="orthodox-blessing">✞ ለእግዚአብሔር ክብር ይሁን ✞</span>
+                <span class="save-the-date">ሽምግልና ጋብቻ</span>
+                <h1 class="couple-names">ሰናይት &amp; አበበ</h1>
+                <div class="orthodox-divider">✞ ✞ ✞</div>
+                <p class="wedding-date">መስከረም ፲፭ ቀን ፳፻፲፱</p>
+                <p class="wedding-date-sub">September 25, 2026</p>
+                <div class="countdown-wrapper">
+                    <div class="countdown-item"><span id="days">00</span><br>ቀናት</div>
+                    <div class="countdown-item"><span id="hours">00</span><br>ሰዓት</div>
+                    <div class="countdown-item"><span id="mins">00</span><br>ደቂቃ</div>
+                    <div class="countdown-item"><span id="secs">00</span><br>ሰከንድ</div>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <span>ወደ ታች</span>
+                <div class="arrow"></div>
+            </div>
+        </section>
+
+        <!-- Details Section -->
+        <section id="details" class="details slide-up">
+            <div class="glass-card">
+                <h2>ስለ ሥነ ሥርዓቱ</h2>
+                <div class="details-grid">
+                    <div class="detail-item">
+                        <h3>መቼ</h3>
+                        <p>ቅዳሜ፣ መስከረም ፲፭ ቀን ፳፻፲፱<br>ሥነ ሥርዓቱ የሚጀምረው ከሰአት ፲ ሰዓት ነው</p>
+                    </div>
+                    <div class="detail-item">
+                        <h3>የት</h3>
+                        <p>ትልቁ የዝግጅት አዳራሽ<br>ቦሌ ክ/ከተማ፣ አዲስ አበባ<br>ኢትዮጵያ</p>
+                    </div>
+                    <div class="detail-item">
+                        <h3>የልብስ ዓይነት</h3>
+                        <p>ኢትዮጵያዊ ባህላዊ ልብስ<br>ወይም ፎርማል ልብስ</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline Section -->
+        <section id="timeline" class="timeline scale-in">
+            <div class="glass-card">
+                <h2>የዕለቱ መርሃ ግብር</h2>
+                <ul class="timeline-list">
+                    <li>
+                        <span class="time">ከሰ·ሰ ፲·፟00</span>
+                        <div class="content">
+                            <h3>እንኳን ደህና መጡ</h3>
+                            <p>እንግዶችን ለመቀበል ቤተሰቦቹ ይቆማሉ።</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="time">ከሰ·ሰ ፲·፟30</span>
+                        <div class="content">
+                            <h3>ሽምግልና ሥነ ሥርዓት</h3>
+                            <p>ሽማግሌዎቹ ቃለ ኪዳን ያደርጋሉ።</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="time">ከሰ·ሰ ፲·፟2·30</span>
+                        <div class="content">
+                            <h3>ጸሎትና ምርቃት</h3>
+                            <p>የቄስ ጸሎትና የሽማግሌዎቹ ምርቃት።</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="time">ከሰ·ሰ ፲·፟3·00</span>
+                        <div class="content">
+                            <h3>መዝሙር</h3>
+                            <p>የቀደሰ ዝማሬ፣ ብፁዕ ምርቃትና ቅዱስ ጸሎት።</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="time">ምሽት ፮·00</span>
+                        <div class="content">
+                            <h3>መሸኘት</h3>
+                            <p>ቤተሰቦቻቸው ሙሽሮቹን ይሸኛሉ።</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- RSVP Section -->
+        <section id="rsvp" class="rsvp slide-up">
+            <div class="glass-container form-container">
+                <h2>ትመጣሉ?</h2>
+                <p>እባካችሁ እስከ ሐምሌ ፳፭ ቀን ምላሽ ይላኩ።</p>
+                <form id="rsvp-form">
+                    <div class="input-group">
+                        <label for="name">ሙሉ ስም</label>
+                        <input type="text" id="name" required placeholder="ለምሳሌ፦ አበበ ከበደ">
+                    </div>
+                    <div class="input-group">
+                        <label for="email">ኢሜይል</label>
+                        <input type="email" id="email" required placeholder="abebe@example.com">
+                    </div>
+                    <div class="input-group">
+                        <label>ምላሽዎ</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="attending" value="yes" required> በደስታ እቀበላለሁ</label>
+                            <label><input type="radio" name="attending" value="no"> ይቅርታ አልችልም</label>
+                        </div>
+                    </div>
+                    <div class="input-group attending-only" id="guest-count-group" style="display: none;">
+                        <label for="guests">የሰው ብዛት</label>
+                        <select id="guests">
+                            <option value="1">፩ (እኔ ብቻ)</option>
+                            <option value="2">፪</option>
+                            <option value="3">፫</option>
+                            <option value="4">፬</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="submit-btn">ምላሽ ላክ</button>
+                    <div id="form-message" class="hidden-message"></div>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>✞ ለእግዚአብሔር ክብርና ምስጋና — ሰናይት &amp; አበበ ቤተሰቦች ✞</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

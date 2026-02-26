@@ -1,0 +1,1234 @@
+/* ============================================================
+   Custom Properties
+   ============================================================ */
+:root {
+    --gold: #D4AF37;
+    --gold-light: #F0D060;
+    --gold-dark: #A07820;
+    --burgundy: #7B1A1A;
+    --burgundy-dark: #4A0A0A;
+    --cream: #F5EDD8;
+    --cream-dark: #E8D5B0;
+    --env-body: #F0E4C8;
+    --env-shadow: #B89050;
+    --text-dark: #2c1408;
+    --text-light: #F5EDD8;
+    --glass-bg: rgba(60, 8, 8, 0.42);
+    --glass-border: rgba(212, 175, 55, 0.4);
+    --glass-shadow: 0 8px 40px rgba(0, 0, 0, 0.55);
+    --blur: blur(14px);
+
+    --font-heading: 'Noto Serif Ethiopic', serif;
+    --font-subheading: 'Noto Serif Ethiopic', serif;
+    --font-body: 'Noto Sans Ethiopic', sans-serif;
+}
+
+/* ============================================================
+   Reset & Scaffolding
+   ============================================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--text-dark);
+    line-height: 1.6;
+    overflow-x: hidden;
+    background-color: #090203;
+}
+
+/* ============================================================
+   Particle Canvas
+   ============================================================ */
+#particle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10000;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+/* ============================================================
+   Fixed Background
+   ============================================================ */
+.bg-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(rgba(55, 4, 4, 0.52), rgba(0, 0, 0, 0.55)),
+        url('IMG_6796.JPG') no-repeat center top / cover;
+    z-index: -1;
+    transform: translateZ(0);
+}
+
+/* ============================================================
+   ENVELOPE OVERLAY
+   ============================================================ */
+.envelope-overlay {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 40%, #2d0404 0%, #0d0102 70%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 1.2s ease-out, visibility 1.2s ease-out;
+    overflow: hidden;
+}
+
+.envelope-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* Light rays behind envelope */
+.light-rays {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+}
+
+.ray {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2px;
+    height: 55vh;
+    background: linear-gradient(to bottom, rgba(180, 30, 30, 0.22), rgba(212, 175, 55, 0.1), transparent);
+    transform-origin: top center;
+    animation: rayRotate 12s linear infinite;
+}
+
+.ray:nth-child(1) {
+    transform: translateX(-50%) rotate(0deg);
+    animation-delay: 0s;
+}
+
+.ray:nth-child(2) {
+    transform: translateX(-50%) rotate(72deg);
+    animation-delay: -2.4s;
+}
+
+.ray:nth-child(3) {
+    transform: translateX(-50%) rotate(144deg);
+    animation-delay: -4.8s;
+}
+
+.ray:nth-child(4) {
+    transform: translateX(-50%) rotate(216deg);
+    animation-delay: -7.2s;
+}
+
+.ray:nth-child(5) {
+    transform: translateX(-50%) rotate(288deg);
+    animation-delay: -9.6s;
+}
+
+@keyframes rayRotate {
+    to {
+        transform: translateX(-50%) rotate(360deg);
+    }
+}
+
+.ray:nth-child(2) {
+    animation-name: rayRotate2;
+}
+
+.ray:nth-child(3) {
+    animation-name: rayRotate3;
+}
+
+.ray:nth-child(4) {
+    animation-name: rayRotate4;
+}
+
+.ray:nth-child(5) {
+    animation-name: rayRotate5;
+}
+
+@keyframes rayRotate2 {
+    to {
+        transform: translateX(-50%) rotate(432deg);
+    }
+}
+
+@keyframes rayRotate3 {
+    to {
+        transform: translateX(-50%) rotate(504deg);
+    }
+}
+
+@keyframes rayRotate4 {
+    to {
+        transform: translateX(-50%) rotate(576deg);
+    }
+}
+
+@keyframes rayRotate5 {
+    to {
+        transform: translateX(-50%) rotate(648deg);
+    }
+}
+
+/* ============================================================
+   ENVELOPE SCENE
+   ============================================================ */
+.envelope-scene {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    animation: sceneFloat 5s ease-in-out infinite;
+}
+
+@keyframes sceneFloat {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+}
+
+/* Wrapper provides perspective for 3D transforms */
+.envelope-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    perspective: 900px;
+}
+
+/* ============================================================
+   ENVELOPE — 3D body
+   ============================================================ */
+.envelope {
+    position: relative;
+    width: 420px;
+    height: 290px;
+    filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.7)) drop-shadow(0 0 25px rgba(212, 175, 55, 0.15));
+    transition: filter 0.6s ease;
+}
+
+/* --- Envelope Back --- */
+.env-back {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, #e8d4a8 0%, #d4c090 100%);
+    border-radius: 6px 6px 8px 8px;
+    border: 1.5px solid var(--env-shadow);
+    z-index: 1;
+    overflow: hidden;
+}
+
+/* Diagonal fold lines on back */
+.env-back-fold-left,
+.env-back-fold-right {
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+
+.env-back-fold-left {
+    left: 0;
+    border-width: 145px 0 0 210px;
+    border-color: transparent transparent transparent rgba(190, 175, 140, 0.6);
+}
+
+.env-back-fold-right {
+    right: 0;
+    border-width: 145px 210px 0 0;
+    border-color: transparent rgba(190, 175, 140, 0.6) transparent transparent;
+}
+
+.env-back-fold-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background: linear-gradient(to top, rgba(210, 200, 175, 0.5) 0%, transparent 100%);
+    clip-path: polygon(0 100%, 50% 0, 100% 100%);
+}
+
+/* --- Invitation Card --- */
+.env-card {
+    position: absolute;
+    top: 12px;
+    left: 20px;
+    right: 20px;
+    height: 240px;
+    background: linear-gradient(155deg, #fffdf7 0%, #f9f2e0 60%, #f2e8cc 100%);
+    border-radius: 4px;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(0);
+    transition: transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+
+    /* Inner decorative border */
+    outline: 1px solid rgba(212, 175, 55, 0.25);
+    outline-offset: 8px;
+}
+
+.env-card::before {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 2px;
+    pointer-events: none;
+}
+
+.card-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    text-align: center;
+    padding: 20px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.8s ease 2s, transform 0.8s ease 2s;
+}
+
+.card-label {
+    font-family: var(--font-subheading);
+    font-style: italic;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    color: var(--gold-dark);
+    text-transform: uppercase;
+}
+
+.card-names {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--gold);
+    line-height: 1.3;
+    text-shadow: 0 1px 3px rgba(160, 120, 32, 0.3);
+}
+
+.card-date {
+    font-family: var(--font-subheading);
+    font-size: 0.9rem;
+    color: #6b5a30;
+    letter-spacing: 1.5px;
+}
+
+/* When card is revealed */
+.env-card.revealed .card-inner {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* When card slides up out of envelope */
+.env-card.rising {
+    transform: translateY(-130px);
+}
+
+/* --- Envelope Front (covers bottom half of card) --- */
+.env-front {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 160px;
+    background: linear-gradient(160deg, #e8d4a8 0%, #d0b878 100%);
+    border-radius: 0 0 8px 8px;
+    border: 1.5px solid var(--env-shadow);
+    border-top: none;
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.env-front::before,
+.env-front::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+
+.env-front::before {
+    left: 0;
+    border-width: 160px 0 0 210px;
+    border-color: transparent transparent transparent rgba(200, 188, 160, 0.55);
+}
+
+.env-front::after {
+    right: 0;
+    border-width: 160px 210px 0 0;
+    border-color: transparent rgba(200, 188, 160, 0.55) transparent transparent;
+}
+
+.env-address {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    z-index: 1;
+    text-align: center;
+}
+
+.addr-to {
+    font-family: var(--font-subheading);
+    font-size: 0.65rem;
+    letter-spacing: 3px;
+    color: #a08050;
+    text-transform: uppercase;
+}
+
+.addr-name {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #7a5c28;
+}
+
+/* --- Envelope Flap (top triangle) --- */
+.env-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 175px;
+    z-index: 5;
+    transform-origin: top center;
+    transform-style: preserve-3d;
+    transition: transform 1.6s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+}
+
+/* Orthodox cross watermark on envelope overlay */
+.envelope-overlay::after {
+    content: '✞';
+    position: absolute;
+    font-size: 22vw;
+    color: rgba(180, 30, 30, 0.04);
+    pointer-events: none;
+    user-select: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+}
+
+/* Triangle shape for the flap */
+.flap-inner {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(170deg, #ede0c0 0%, #d8c998 40%, #cfc090 100%);
+    clip-path: polygon(0 0, 100% 0, 50% 72%);
+    border-radius: 6px 6px 0 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.flap-inner::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.25) 0%, transparent 60%);
+    clip-path: polygon(0 0, 100% 0, 50% 72%);
+}
+
+/* Flap opened state — rotates back over the top */
+.env-flap.opened {
+    transform: rotateX(-170deg);
+}
+
+/* ============================================================
+   WAX SEAL BUTTON
+   ============================================================ */
+.wax-seal-wrap {
+    position: absolute;
+    /* sits at the flap/front seam — center of envelope */
+    top: calc(50% - 36px);
+    /* 290/2 - radius */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.wax-seal-wrap.hiding {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.6);
+    pointer-events: none;
+}
+
+.wax-seal {
+    position: relative;
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    background: radial-gradient(circle at 35% 30%, #7B1818 0%, #4A0808 55%, #280202 100%);
+    box-shadow:
+        0 0 0 3px rgba(212, 175, 55, 0.75),
+        0 0 0 7px rgba(212, 175, 55, 0.18),
+        0 0 0 10px rgba(212, 175, 55, 0.06),
+        0 8px 30px rgba(0, 0, 0, 0.7),
+        0 0 40px rgba(180, 30, 10, 0.35);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: sealPulse 2.5s ease-in-out infinite;
+}
+
+.wax-seal:hover {
+    transform: scale(1.08);
+    box-shadow:
+        0 0 0 3px rgba(212, 175, 55, 1),
+        0 0 0 8px rgba(212, 175, 55, 0.3),
+        0 0 0 12px rgba(212, 175, 55, 0.08),
+        0 12px 40px rgba(0, 0, 0, 0.7),
+        0 0 70px rgba(212, 175, 55, 0.45);
+    animation: none;
+}
+
+.wax-seal:active {
+    transform: scale(0.95);
+}
+
+/* Decorative rings on the seal */
+.seal-ring {
+    position: absolute;
+    inset: 8px;
+    border-radius: 50%;
+    border: 1px solid rgba(212, 175, 55, 0.5);
+    pointer-events: none;
+}
+
+.seal-ring-2 {
+    inset: 14px;
+    border-color: rgba(212, 175, 55, 0.3);
+}
+
+/* Emblem (heart SVG) */
+.seal-emblem {
+    width: 36px;
+    height: 36px;
+    z-index: 1;
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.4));
+}
+
+/* "Open" text label */
+.seal-text {
+    font-family: var(--font-subheading);
+    font-size: 0.6rem;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: rgba(255, 230, 150, 0.85);
+    z-index: 1;
+    display: block;
+}
+
+/* Pulsing glow ring */
+.seal-glow-pulse {
+    position: absolute;
+    inset: -10px;
+    border-radius: 50%;
+    border: 2px solid rgba(212, 175, 55, 0.4);
+    animation: glowPulse 2s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes glowPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: scale(1.15);
+        opacity: 0;
+    }
+}
+
+@keyframes sealPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.65), 0 0 0 6px rgba(212, 175, 55, 0.15), 0 8px 30px rgba(0, 0, 0, 0.65), 0 0 30px rgba(140, 20, 20, 0.5);
+    }
+
+    50% {
+        box-shadow: 0 0 0 3px rgba(212, 175, 55, 1), 0 0 0 8px rgba(212, 175, 55, 0.3), 0 8px 30px rgba(0, 0, 0, 0.7), 0 0 60px rgba(212, 175, 55, 0.5);
+    }
+}
+
+/* Hint text below seal */
+.seal-hint {
+    font-family: var(--font-subheading);
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(212, 175, 55, 0.65);
+    font-style: italic;
+    animation: hintFade 2s ease-in-out infinite;
+    white-space: nowrap;
+}
+
+@keyframes hintFade {
+
+    0%,
+    100% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+/* ============================================================
+   Hide / show main content
+   ============================================================ */
+body.envelope-active .navbar,
+body.envelope-active main,
+body.envelope-active footer {
+    opacity: 0;
+    pointer-events: none;
+}
+
+body.envelope-active .navbar {
+    transform: translateY(-100%);
+}
+
+body.invitation-opened .navbar,
+body.invitation-opened main,
+body.invitation-opened footer {
+    opacity: 1;
+    pointer-events: auto;
+    transition: opacity 1s ease-out 0.5s;
+}
+
+body.invitation-opened .navbar {
+    transform: translateY(0);
+    transition: opacity 1s ease-out 0.5s, transform 1s ease-out 0.5s;
+}
+
+/* ============================================================
+   Navigation
+   ============================================================ */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 20px 50px;
+    z-index: 1000;
+    transition: all 0.4s ease;
+}
+
+.navbar.scrolled {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 15px 50px;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.navbar a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-family: var(--font-subheading);
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    position: relative;
+    transition: color 0.3s;
+}
+
+.navbar a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--gold);
+    transition: width 0.3s ease;
+}
+
+.navbar a:hover::after {
+    width: 100%;
+}
+
+.navbar .rsvp-btn {
+    border: 1px solid var(--gold);
+    padding: 8px 24px;
+    border-radius: 30px;
+    color: var(--gold);
+    font-weight: 500;
+}
+
+.navbar .rsvp-btn::after {
+    display: none;
+}
+
+.navbar .rsvp-btn:hover {
+    background-color: var(--gold);
+    color: #fff;
+    box-shadow: 0 0 15px var(--gold);
+}
+
+/* ============================================================
+   Common Layout
+   ============================================================ */
+section {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 20px;
+    position: relative;
+}
+
+.glass-container,
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: var(--blur);
+    -webkit-backdrop-filter: var(--blur);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    box-shadow: var(--glass-shadow);
+    color: var(--text-light);
+    text-align: center;
+}
+
+h2 {
+    font-family: var(--font-subheading);
+    font-size: 3rem;
+    margin-bottom: 30px;
+    color: var(--gold);
+    font-weight: 500;
+    position: relative;
+}
+
+h2::before,
+h2::after {
+    content: '✞';
+    display: inline-block;
+    font-size: 1.5rem;
+    color: var(--gold-dark);
+    margin: 0 14px;
+    vertical-align: middle;
+    opacity: 0.75;
+}
+
+/* ============================================================
+   Hero Section
+   ============================================================ */
+.hero {
+    flex-direction: column;
+}
+
+.hero .glass-container {
+    padding: 60px 80px;
+    max-width: 800px;
+    width: 100%;
+}
+
+.save-the-date {
+    font-family: var(--font-subheading);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 1.2rem;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 20px;
+}
+
+/* Ethiopian Orthodox decorative cross divider */
+.orthodox-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: 10px 0 24px;
+    color: var(--gold-dark);
+    opacity: 0.7;
+    font-size: 1.1rem;
+    letter-spacing: 8px;
+}
+
+.orthodox-divider::before,
+.orthodox-divider::after {
+    content: '';
+    flex: 1;
+    max-width: 80px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold-dark));
+}
+
+.orthodox-divider::after {
+    background: linear-gradient(to left, transparent, var(--gold-dark));
+}
+
+/* Blessing subtitle */
+.orthodox-blessing {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    color: rgba(240, 208, 96, 0.65);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.couple-names {
+    font-family: var(--font-heading);
+    font-size: 4.5rem;
+    line-height: 1.3;
+    margin-bottom: 10px;
+    font-weight: 600;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+    color: var(--gold-light);
+}
+
+.wedding-date-sub {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.55);
+    letter-spacing: 3px;
+    margin-top: -30px;
+    margin-bottom: 30px;
+    display: block;
+}
+
+.wedding-date {
+    font-family: var(--font-subheading);
+    font-size: 1.8rem;
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+}
+
+.countdown-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.countdown-item {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.countdown-item span {
+    font-size: 2.5rem;
+    font-family: var(--font-subheading);
+    color: var(--gold);
+    display: block;
+    margin-bottom: 5px;
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    color: white;
+    text-align: center;
+    font-family: var(--font-subheading);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    animation: bounce 2s infinite;
+}
+
+.arrow {
+    width: 20px;
+    height: 20px;
+    border-right: 2px solid white;
+    border-bottom: 2px solid white;
+    transform: rotate(45deg);
+    margin: 10px auto 0;
+}
+
+/* ============================================================
+   Details Section
+   ============================================================ */
+.details .glass-card {
+    padding: 60px;
+    max-width: 1000px;
+    width: 100%;
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+}
+
+.detail-item h3 {
+    font-family: var(--font-subheading);
+    font-size: 1.8rem;
+    color: var(--gold);
+    margin-bottom: 15px;
+}
+
+.detail-item p {
+    font-size: 1.1rem;
+}
+
+/* ============================================================
+   Timeline Section
+   ============================================================ */
+.timeline .glass-card {
+    padding: 60px;
+    max-width: 800px;
+    width: 100%;
+}
+
+.timeline-list {
+    list-style: none;
+    position: relative;
+    padding-left: 50px;
+    text-align: left;
+}
+
+.timeline-list::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background-color: var(--gold);
+}
+
+.timeline-list li {
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.timeline-list li:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-list li::before {
+    content: '';
+    position: absolute;
+    left: -46px;
+    top: 5px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: var(--gold);
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 10px var(--gold);
+}
+
+.timeline-list .time {
+    font-family: var(--font-subheading);
+    color: var(--gold);
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.timeline-list h3 {
+    font-family: var(--font-subheading);
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+/* ============================================================
+   RSVP Form
+   ============================================================ */
+.form-container {
+    padding: 60px;
+    max-width: 600px;
+    width: 100%;
+}
+
+.form-container p {
+    margin-bottom: 30px;
+    font-family: var(--font-subheading);
+    font-style: italic;
+    font-size: 1.2rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: left;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    margin-bottom: 8px;
+    font-family: var(--font-subheading);
+    letter-spacing: 1px;
+}
+
+.input-group input[type="text"],
+.input-group input[type="email"],
+.input-group select {
+    padding: 12px 15px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
+    color: white;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s;
+}
+
+.input-group input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: var(--gold);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+.input-group select option {
+    background: #2c2c2c;
+}
+
+.radio-group {
+    display: flex;
+    gap: 20px;
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-style: normal;
+}
+
+.submit-btn {
+    background: var(--gold);
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 1.2rem;
+    font-family: var(--font-subheading);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.submit-btn:hover {
+    background: #b5952f;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+}
+
+.hidden-message {
+    text-align: center;
+    margin-top: 15px;
+    font-weight: 500;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+/* ============================================================
+   Footer
+   ============================================================ */
+footer {
+    text-align: center;
+    padding: 30px;
+    background: rgba(0, 0, 0, 0.8);
+    color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+}
+
+/* ============================================================
+   Keyframe Animations
+   ============================================================ */
+@keyframes bounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-15px);
+    }
+
+    60% {
+        transform: translateY(-7px);
+    }
+}
+
+/* ============================================================
+   Scroll Animations
+   ============================================================ */
+.fade-in,
+.slide-up,
+.scale-in {
+    opacity: 0;
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.slide-up {
+    transform: translateY(50px);
+}
+
+.scale-in {
+    transform: scale(0.9);
+}
+
+.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 520px) {
+    .envelope {
+        width: 320px;
+        height: 222px;
+    }
+
+    .env-back-fold-left {
+        border-width: 111px 0 0 160px;
+    }
+
+    .env-back-fold-right {
+        border-width: 111px 160px 0 0;
+    }
+
+    .env-flap {
+        height: 134px;
+    }
+
+    .env-front {
+        height: 122px;
+    }
+
+    .env-front::before {
+        border-width: 122px 0 0 160px;
+    }
+
+    .env-front::after {
+        border-width: 122px 160px 0 0;
+    }
+
+    .env-card {
+        left: 16px;
+        right: 16px;
+        height: 182px;
+        top: 10px;
+    }
+
+    .card-names {
+        font-size: 2.2rem;
+    }
+
+    .wax-seal-wrap {
+        top: calc(50% - 36px);
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 15px 20px;
+    }
+
+    .navbar.scrolled {
+        padding: 10px 20px;
+    }
+
+    .navbar ul {
+        gap: 15px;
+        font-size: 0.9rem;
+    }
+
+    .couple-names {
+        font-size: 4rem;
+    }
+
+    .wedding-date {
+        font-size: 1.2rem;
+    }
+
+    .hero .glass-container {
+        padding: 40px 20px;
+    }
+
+    .countdown-wrapper {
+        gap: 15px;
+    }
+
+    .countdown-item span {
+        font-size: 1.8rem;
+    }
+
+    .radio-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
