@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="am" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>አመሰግናለን — ረድኤት & ሙሉቀን</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif+Ethiopic:wght@400;500;600;700&family=Noto+Sans+Ethiopic:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --gold-light: #F0D060;
+            --gold-dark: #A07820;
+            --burgundy: #7B1A1A;
+            --font-heading: 'Noto Serif Ethiopic', serif;
+            --font-body: 'Noto Sans Ethiopic', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            min-height: 100vh;
+            font-family: var(--font-body);
+            color: #F5EDD8;
+            overflow-x: hidden;
+        }
+
+        body {
+            background: radial-gradient(ellipse at 50% 20%, #3d0a0a 0%, #1a0202 50%, #0d0101 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        /* Floating particles */
+        .particles {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0;
+            animation: floatUp 8s ease-in infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 0;
+                transform: translateY(0) scale(0.5);
+            }
+
+            10% {
+                opacity: 0.7;
+            }
+
+            90% {
+                opacity: 0.2;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh) scale(1.2);
+            }
+        }
+
+        /* Card */
+        .card {
+            position: relative;
+            z-index: 1;
+            max-width: 560px;
+            width: 100%;
+            background: rgba(60, 8, 8, 0.18);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 24px;
+            padding: 56px 48px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 60px rgba(212, 175, 55, 0.06);
+            animation: cardIn 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        @keyframes cardIn {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Cross watermark */
+        .card::before {
+            content: '✞';
+            position: absolute;
+            font-size: 18rem;
+            color: rgba(212, 175, 55, 0.03);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .top-blessing {
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            color: rgba(240, 208, 96, 0.65);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease 0.4s both;
+        }
+
+        .cross-divider {
+            color: var(--gold-dark);
+            font-size: 1.1rem;
+            letter-spacing: 10px;
+            margin: 16px 0;
+            opacity: 0.7;
+            animation: fadeIn 1s ease 0.6s both;
+        }
+
+        .thank-you-title {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            color: var(--gold-light);
+            line-height: 1.3;
+            margin: 12px 0 8px;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1s ease 0.5s both;
+        }
+
+        .couple-names {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 8px;
+            animation: fadeIn 1s ease 0.7s both;
+        }
+
+        .shimgilina-label {
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            color: rgba(240, 208, 96, 0.6);
+            margin-bottom: 30px;
+            animation: fadeIn 1s ease 0.8s both;
+        }
+
+        /* Heart with glow */
+        .heart-icon {
+            font-size: 3.5rem;
+            display: block;
+            margin: 18px auto;
+            animation: heartBeat 2s ease-in-out infinite, fadeIn 1s ease 0.9s both;
+            filter: drop-shadow(0 0 16px rgba(212, 175, 55, 0.6));
+        }
+
+        @keyframes heartBeat {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            25% {
+                transform: scale(1.12);
+            }
+
+            50% {
+                transform: scale(1);
+            }
+
+            75% {
+                transform: scale(1.06);
+            }
+        }
+
+        .message-box {
+            background: rgba(212, 175, 55, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 12px;
+            padding: 24px 28px;
+            margin: 24px 0;
+            animation: fadeIn 1s ease 1s both;
+        }
+
+        .message-am {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            color: #F5EDD8;
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+
+        .message-en {
+            font-family: Georgia, serif;
+            font-size: 0.9rem;
+            color: rgba(240, 220, 160, 0.55);
+            font-style: italic;
+            line-height: 1.7;
+        }
+
+        .blessing-footer {
+            margin-top: 28px;
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            color: rgba(212, 175, 55, 0.55);
+            letter-spacing: 1.5px;
+            animation: fadeIn 1s ease 1.2s both;
+        }
+
+        .date-badge {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 8px 22px;
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            border-radius: 30px;
+            font-family: var(--font-body);
+            font-size: 0.82rem;
+            color: rgba(240, 208, 96, 0.7);
+            letter-spacing: 1px;
+            animation: fadeIn 1s ease 1.3s both;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 28px;
+            padding: 11px 30px;
+            border: 1.5px solid var(--gold);
+            border-radius: 30px;
+            color: var(--gold);
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            text-decoration: none;
+            letter-spacing: 1px;
+            transition: background 0.25s, color 0.25s, box-shadow 0.25s;
+            animation: fadeIn 1s ease 1.4s both;
+        }
+
+        .back-btn:hover {
+            background: var(--gold);
+            color: #1a0000;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.45);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .card {
+                padding: 36px 20px;
+            }
+
+            .thank-you-title {
+                font-size: 2.2rem;
+            }
+
+            .couple-names {
+                font-size: 1.6rem;
+            }
+
+            .message-am {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Floating gold particles -->
+    <div class="particles" id="particles"></div>
+
+    <div class="card">
+        <span class="top-blessing">✞ ስለ እግዚአብሔር ፍቅር ✞</span>
+
+        <div class="thank-you-title">አመሰግናለን!</div>
+        <div class="cross-divider">✞ ✞ ✞</div>
+
+        <div class="couple-names">ረድኤት & ሙሉቀን</div>
+        <div class="shimgilina-label">ሽምግልና ሥነ ሥርዓት · መስከረም ፲፭ ቀን ፳፻፲፱ ዓ.ም</div>
+
+        <span class="heart-icon">💛</span>
+
+        <div class="message-box">
+            <p class="message-am">
+                ወደ ሽምግልናችን ሥነ ሥርዓት ስለ ደረሳችሁ ከልብ እናመሰግናለን።<br>
+                እናንተን ማግኘታችን ደስታና ክብር ነው።<br>
+                እግዚአብሔር አምላካችን ይባርካችሁ፣ ቤታችሁን ያሳምርላችሁ።
+            </p>
+            <p class="message-en">
+                We are truly grateful for your presence at our Shimgilina ceremony.<br>
+                May God bless you and your family abundantly.
+            </p>
+        </div>
+
+        <div class="blessing-footer">✞ ለእግዚአብሔር ክብርና ምስጋና ✞</div>
+
+        <div class="date-badge">📅 September 25, 2026 · Bole, Addis Ababa</div>
+
+        <br>
+        <a href="index.html" class="back-btn">← ወደ ጋብዣ ተመለስ</a>
+    </div>
+
+    <script>
+        // Generate floating gold particles
+        const container = document.getElementById('particles');
+        const colors = ['rgba(212,175,55,0.5)', 'rgba(240,208,96,0.4)', 'rgba(255,220,120,0.35)', 'rgba(180,30,30,0.3)'];
+        for (let i = 0; i < 28; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            const size = Math.random() * 5 + 2;
+            p.style.cssText = `
+                width:${size}px; height:${size}px;
+                left:${Math.random() * 100}%;
+                bottom:${Math.random() * 10}%;
+                background:${colors[Math.floor(Math.random() * colors.length)]};
+                animation-delay:${Math.random() * 8}s;
+                animation-duration:${6 + Math.random() * 6}s;
+            `;
+            container.appendChild(p);
+        }
+    </script>
+</body>
+
+</html>

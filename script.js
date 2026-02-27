@@ -118,14 +118,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ─── Countdown Timer ──────────────────────────────────────────────
-    const weddingDate = new Date('September 25, 2026 16:00:00').getTime();
+    const weddingDate = new Date('September 25, 2026 10:00:00').getTime();
 
     const updateCountdown = () => {
         const now = new Date().getTime();
         const distance = weddingDate - now;
 
         if (distance < 0) {
-            document.querySelector('.countdown-wrapper').innerHTML = '<h3>Just Married!</h3>';
+            document.querySelector('.countdown-wrapper').innerHTML = '<h3 style="color:var(--gold);font-family:var(--font-heading);">✞ ዛሬ ሽምግልናቸው ዕለት ነው! ✞</h3>';
             return;
         }
 
@@ -183,14 +183,14 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         const btn = form.querySelector('.submit-btn');
         const originalText = btn.innerText;
-        btn.innerText = 'እየላኩ…';
+        btn.innerText = 'እየተመዘገበ…';
         btn.disabled = true;
 
         setTimeout(() => {
             const isAttending = document.querySelector('input[name="attending"]:checked').value;
             formMessage.innerText = isAttending === 'yes'
-                ? "አመሰግናለሁ! ከእናንተ ጋር ለማክበር ጓጉተናል።"
-                : "ስለ አሳወቁን እናመሰግናለን። ሳያችሁ ያስቆጫናል!";
+                ? "✞ አምላካችን ይባርካቸሁ! ምዝገባዎ ደርሷል። ከእናንተ ጋር ለማክበር ጓጉተናል። ✞"
+                : "ስለ አሳወቁን አመሰግናለን። ሁሌም ጤና ይስጥልን።";
             formMessage.style.color = isAttending === 'yes' ? '#d4af37' : '#ffffff';
             formMessage.style.opacity = '1';
             form.reset();

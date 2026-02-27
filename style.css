@@ -13,10 +13,10 @@
     --env-shadow: #B89050;
     --text-dark: #2c1408;
     --text-light: #F5EDD8;
-    --glass-bg: rgba(60, 8, 8, 0.42);
-    --glass-border: rgba(212, 175, 55, 0.4);
-    --glass-shadow: 0 8px 40px rgba(0, 0, 0, 0.55);
-    --blur: blur(14px);
+    --glass-bg: rgba(60, 8, 8, 0.12);
+    --glass-border: rgba(212, 175, 55, 0.22);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.28);
+    --blur: blur(8px);
 
     --font-heading: 'Noto Serif Ethiopic', serif;
     --font-subheading: 'Noto Serif Ethiopic', serif;
@@ -920,6 +920,68 @@ h2::after {
 }
 
 /* ============================================================
+   Map Block
+   ============================================================ */
+.map-wrapper {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.map-label {
+    font-family: var(--font-subheading);
+    font-size: 1rem;
+    color: var(--gold);
+    letter-spacing: 1.5px;
+    text-align: center;
+    opacity: 0.9;
+}
+
+.map-frame {
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1.5px solid rgba(212, 175, 55, 0.35);
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.45);
+    line-height: 0;
+}
+
+.map-frame iframe {
+    display: block;
+    width: 100%;
+    height: 320px;
+    border: 0;
+    border-radius: 12px;
+    filter: saturate(0.85) brightness(0.92) sepia(0.1);
+    transition: filter 0.3s ease;
+}
+
+.map-frame iframe:hover {
+    filter: saturate(1) brightness(1) sepia(0);
+}
+
+.map-directions-btn {
+    display: inline-block;
+    align-self: center;
+    padding: 10px 28px;
+    background: transparent;
+    border: 1.5px solid var(--gold);
+    color: var(--gold);
+    font-family: var(--font-subheading);
+    font-size: 1rem;
+    border-radius: 30px;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.map-directions-btn:hover {
+    background: var(--gold);
+    color: #1a0000;
+    box-shadow: 0 0 18px rgba(212, 175, 55, 0.5);
+}
+
+/* ============================================================
    Timeline Section
    ============================================================ */
 .timeline .glass-card {
@@ -983,109 +1045,225 @@ h2::after {
 }
 
 /* ============================================================
-   RSVP Form
+   QR Code Section
    ============================================================ */
-.form-container {
-    padding: 60px;
-    max-width: 600px;
+/* .qr-section inherits the shared section base styles */
+
+.qr-container {
+    padding: 56px 48px;
+    max-width: 560px;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.form-container p {
-    margin-bottom: 30px;
+.qr-subtitle {
     font-family: var(--font-subheading);
+    font-size: 1.05rem;
     font-style: italic;
-    font-size: 1.2rem;
+    color: rgba(240, 220, 160, 0.85);
+    margin-bottom: 36px;
+    text-align: center;
+    line-height: 1.7;
 }
 
-form {
+/* ── The decorative card that holds the QR ── */
+.qr-card {
+    position: relative;
+    background: rgba(26, 2, 2, 0.55);
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    border-radius: 20px;
+    padding: 36px 32px 28px;
+    width: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 20px;
-    text-align: left;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5), inset 0 0 60px rgba(212, 175, 55, 0.03);
 }
 
-.input-group {
-    display: flex;
-    flex-direction: column;
+/* Gold corner ornaments */
+.qr-corner {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    border-color: var(--gold-dark);
+    border-style: solid;
+    opacity: 0.7;
 }
 
-.input-group label {
-    margin-bottom: 8px;
+.qr-corner--tl {
+    top: 12px;
+    left: 12px;
+    border-width: 2px 0 0 2px;
+    border-radius: 4px 0 0 0;
+}
+
+.qr-corner--tr {
+    top: 12px;
+    right: 12px;
+    border-width: 2px 2px 0 0;
+    border-radius: 0 4px 0 0;
+}
+
+.qr-corner--bl {
+    bottom: 12px;
+    left: 12px;
+    border-width: 0 0 2px 2px;
+    border-radius: 0 0 0 4px;
+}
+
+.qr-corner--br {
+    bottom: 12px;
+    right: 12px;
+    border-width: 0 2px 2px 0;
+    border-radius: 0 0 4px 0;
+}
+
+.qr-inner-label {
     font-family: var(--font-subheading);
-    letter-spacing: 1px;
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    color: var(--gold-dark);
+    text-transform: uppercase;
+    opacity: 0.9;
 }
 
-.input-group input[type="text"],
-.input-group input[type="email"],
-.input-group select {
-    padding: 12px 15px;
-    background: rgba(255, 255, 255, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 5px;
-    color: white;
-    font-family: var(--font-body);
-    font-size: 1rem;
-    outline: none;
-    transition: all 0.3s;
+/* ── QR image frame with animated scan line ── */
+.qr-frame {
+    position: relative;
+    border-radius: 14px;
+    padding: 10px;
+    background: rgba(26, 2, 2, 0.7);
+    border: 1.5px solid rgba(212, 175, 55, 0.4);
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.12);
 }
 
-.input-group input::placeholder {
-    color: rgba(255, 255, 255, 0.6);
+.qr-image {
+    display: block;
+    width: 220px;
+    height: 220px;
+    border-radius: 8px;
 }
 
-.input-group input:focus,
-.input-group select:focus {
-    background: rgba(255, 255, 255, 0.3);
-    border-color: var(--gold);
-    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+/* Animated laser scan line */
+.qr-scan-line {
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    height: 2px;
+    background: linear-gradient(to right, transparent, rgba(212, 175, 55, 0.9), transparent);
+    border-radius: 2px;
+    animation: scanMove 2.5s ease-in-out infinite;
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
+    top: 10px;
 }
 
-.input-group select option {
-    background: #2c2c2c;
+@keyframes scanMove {
+    0% {
+        top: 10px;
+        opacity: 0.8;
+    }
+
+    50% {
+        top: calc(100% - 12px);
+        opacity: 1;
+    }
+
+    100% {
+        top: 10px;
+        opacity: 0.8;
+    }
 }
 
-.radio-group {
+/* ── Step-by-step instructions ── */
+.qr-instructions {
+    width: 100%;
     display: flex;
-    gap: 20px;
+    flex-direction: column;
+    gap: 10px;
 }
 
-.radio-group label {
+.qr-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: rgba(245, 237, 216, 0.85);
+    line-height: 1.5;
+}
+
+.step-num {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(212, 175, 55, 0.15);
+    border: 1px solid rgba(212, 175, 55, 0.45);
+    color: var(--gold);
+    font-family: var(--font-subheading);
+    font-size: 0.85rem;
     display: flex;
     align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    font-family: var(--font-body);
-    font-style: normal;
+    justify-content: center;
 }
 
-.submit-btn {
-    background: var(--gold);
-    color: white;
-    border: none;
-    padding: 15px;
-    font-size: 1.2rem;
+/* ── Direct-open button ── */
+.qr-direct-btn {
+    display: inline-block;
+    padding: 12px 32px;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.18) 0%, rgba(212, 175, 55, 0.06) 100%);
+    border: 1.5px solid var(--gold);
+    color: var(--gold);
     font-family: var(--font-subheading);
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s;
-    margin-top: 10px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+    font-size: 1rem;
+    border-radius: 30px;
+    text-decoration: none;
+    letter-spacing: 1.5px;
+    transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
 }
 
-.submit-btn:hover {
-    background: #b5952f;
+.qr-direct-btn:hover {
+    background: var(--gold);
+    color: #1a0000;
+    box-shadow: 0 0 22px rgba(212, 175, 55, 0.5);
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
 }
 
-.hidden-message {
+.qr-note {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    color: rgba(212, 175, 55, 0.45);
     text-align: center;
-    margin-top: 15px;
-    font-weight: 500;
-    opacity: 0;
-    transition: opacity 0.5s;
+    margin-top: 8px;
+    line-height: 1.6;
+}
+
+/* Responsive QR */
+@media (max-width: 600px) {
+    .qr-container {
+        padding: 36px 20px;
+    }
+
+    .qr-image {
+        width: 180px;
+        height: 180px;
+    }
+}
+
+@media (max-width: 480px) {
+    .qr-image {
+        width: 150px;
+        height: 150px;
+    }
+
+    .qr-direct-btn {
+        padding: 10px 22px;
+        font-size: 0.9rem;
+    }
 }
 
 /* ============================================================
@@ -1145,90 +1323,318 @@ footer {
 }
 
 /* ============================================================
-   Responsive
+   Responsive — Tablet  (≤ 768px)
    ============================================================ */
-@media (max-width: 520px) {
-    .envelope {
-        width: 320px;
-        height: 222px;
-    }
-
-    .env-back-fold-left {
-        border-width: 111px 0 0 160px;
-    }
-
-    .env-back-fold-right {
-        border-width: 111px 160px 0 0;
-    }
-
-    .env-flap {
-        height: 134px;
-    }
-
-    .env-front {
-        height: 122px;
-    }
-
-    .env-front::before {
-        border-width: 122px 0 0 160px;
-    }
-
-    .env-front::after {
-        border-width: 122px 160px 0 0;
-    }
-
-    .env-card {
-        left: 16px;
-        right: 16px;
-        height: 182px;
-        top: 10px;
-    }
-
-    .card-names {
-        font-size: 2.2rem;
-    }
-
-    .wax-seal-wrap {
-        top: calc(50% - 36px);
-    }
-}
-
 @media (max-width: 768px) {
+
+    /* --- Navbar --- */
     .navbar {
-        padding: 15px 20px;
+        padding: 12px 16px;
     }
 
     .navbar.scrolled {
-        padding: 10px 20px;
+        padding: 10px 16px;
     }
 
     .navbar ul {
-        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px 18px;
         font-size: 0.9rem;
     }
 
+    /* --- Hero --- */
+    .hero .glass-container {
+        padding: 40px 24px;
+    }
+
     .couple-names {
-        font-size: 4rem;
+        font-size: 3.2rem;
     }
 
     .wedding-date {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
     }
 
-    .hero .glass-container {
-        padding: 40px 20px;
+    .save-the-date {
+        font-size: 1rem;
+        letter-spacing: 2px;
     }
 
     .countdown-wrapper {
-        gap: 15px;
+        gap: 16px;
     }
 
     .countdown-item span {
-        font-size: 1.8rem;
+        font-size: 2rem;
+    }
+
+    /* --- Details --- */
+    .details .glass-card {
+        padding: 40px 24px;
+    }
+
+    .details-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+
+    .detail-item h3 {
+        font-size: 1.4rem;
+    }
+
+    .map-frame iframe {
+        height: 260px;
+    }
+
+    /* --- Timeline --- */
+    .timeline .glass-card {
+        padding: 40px 20px;
+    }
+
+    .timeline-list {
+        padding-left: 36px;
+    }
+
+    .timeline-list h3 {
+        font-size: 1.2rem;
+    }
+
+    .timeline-list .time {
+        font-size: 1rem;
+    }
+
+    /* --- RSVP --- */
+    .form-container {
+        padding: 40px 24px;
     }
 
     .radio-group {
         flex-direction: column;
         gap: 10px;
+    }
+
+    /* --- Headings --- */
+    h2 {
+        font-size: 2.2rem;
+    }
+}
+
+/* ============================================================
+   Responsive — Large phone  (≤ 600px)
+   ============================================================ */
+@media (max-width: 600px) {
+
+    section {
+        padding: 80px 12px;
+    }
+
+    .navbar ul {
+        gap: 8px 14px;
+        font-size: 0.82rem;
+    }
+
+    .navbar .rsvp-btn {
+        padding: 6px 16px;
+    }
+
+    /* --- Hero --- */
+    .couple-names {
+        font-size: 2.6rem;
+    }
+
+    .wedding-date {
+        font-size: 1.1rem;
+        letter-spacing: 1px;
+    }
+
+    .orthodox-blessing {
+        font-size: 0.7rem;
+        letter-spacing: 1.5px;
+    }
+
+    .countdown-wrapper {
+        gap: 10px;
+    }
+
+    .countdown-item {
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+    }
+
+    .countdown-item span {
+        font-size: 1.6rem;
+    }
+
+    /* --- Sections padding --- */
+    .details .glass-card,
+    .timeline .glass-card,
+    .form-container {
+        padding: 30px 16px;
+    }
+
+    .detail-item h3 {
+        font-size: 1.2rem;
+        margin-bottom: 8px;
+    }
+
+    .detail-item p {
+        font-size: 1rem;
+    }
+
+    .map-frame iframe {
+        height: 220px;
+    }
+
+    .map-directions-btn {
+        padding: 9px 20px;
+        font-size: 0.9rem;
+    }
+
+    /* --- Timeline --- */
+    .timeline-list {
+        padding-left: 30px;
+    }
+
+    .timeline-list li::before {
+        left: -38px;
+        width: 12px;
+        height: 12px;
+    }
+
+    .timeline-list .time {
+        font-size: 0.9rem;
+    }
+
+    .timeline-list h3 {
+        font-size: 1.1rem;
+    }
+
+    /* --- RSVP --- */
+    .form-container p {
+        font-size: 1rem;
+    }
+
+    .submit-btn {
+        font-size: 1rem;
+        padding: 13px;
+    }
+
+    h2 {
+        font-size: 1.9rem;
+    }
+
+    h2::before,
+    h2::after {
+        font-size: 1.1rem;
+        margin: 0 8px;
+    }
+}
+
+/* ============================================================
+   Responsive — Small phone  (≤ 480px)
+   ============================================================ */
+@media (max-width: 480px) {
+
+    /* --- Envelope --- */
+    .envelope {
+        width: 300px;
+        height: 208px;
+    }
+
+    .env-back-fold-left {
+        border-width: 104px 0 0 150px;
+    }
+
+    .env-back-fold-right {
+        border-width: 104px 150px 0 0;
+    }
+
+    .env-flap {
+        height: 126px;
+    }
+
+    .env-front {
+        height: 114px;
+    }
+
+    .env-front::before {
+        border-width: 114px 0 0 150px;
+    }
+
+    .env-front::after {
+        border-width: 114px 150px 0 0;
+    }
+
+    .env-card {
+        left: 14px;
+        right: 14px;
+        height: 170px;
+        top: 8px;
+    }
+
+    .card-names {
+        font-size: 1.6rem;
+    }
+
+    .card-label {
+        font-size: 0.6rem;
+    }
+
+    .card-date {
+        font-size: 0.75rem;
+    }
+
+    .wax-seal {
+        width: 72px;
+        height: 72px;
+    }
+
+    .seal-emblem {
+        width: 28px;
+        height: 28px;
+    }
+
+    .seal-text {
+        font-size: 0.5rem;
+    }
+
+    .seal-hint {
+        font-size: 0.65rem;
+    }
+
+    /* --- Hero --- */
+    .hero .glass-container {
+        padding: 30px 14px;
+    }
+
+    .couple-names {
+        font-size: 2rem;
+        line-height: 1.2;
+    }
+
+    .wedding-date {
+        font-size: 1rem;
+        margin-bottom: 24px;
+    }
+
+    /* --- Navbar minimal --- */
+    .navbar {
+        padding: 10px 12px;
+    }
+
+    .navbar ul {
+        gap: 6px 10px;
+        font-size: 0.78rem;
+    }
+
+    /* --- Map --- */
+    .map-frame iframe {
+        height: 180px;
+    }
+
+    /* --- Footer --- */
+    footer p {
+        font-size: 0.8rem;
     }
 }

@@ -46,9 +46,9 @@
                     <!-- Invitation Card -->
                     <div class="env-card" id="env-card">
                         <div class="card-inner">
-                            <span class="card-label">ጋብዘናችኋል</span>
-                            <span class="card-names">ሬድኤት &amp; ሙሉቀን</span>
-                            <span class="card-date">መስከረም ፲፭ ቀን ፳፻፲፱</span>
+                            <span class="card-label">ወደ ሽምግልናችን ጋብዘናችኋል</span>
+                            <span class="card-names">ሬድኤት & ሙሉቀን</span>
+                            <span class="card-date">መስከረም ፲፭ ቀን ፳፻፲፱ ዓ.ም</span>
                         </div>
                     </div>
 
@@ -107,10 +107,10 @@
     <!-- Navigation -->
     <nav class="navbar">
         <ul>
-            <li><a href="#welcome">እንኳን ደህና መጡ</a></li>
-            <li><a href="#details">ዝርዝሮች</a></li>
-            <li><a href="#timeline">መርሃ ግብር</a></li>
-            <li><a href="#rsvp" class="rsvp-btn">ምላሽ ላኩ</a></li>
+            <li><a href="#welcome">ዋና ገጽ</a></li>
+            <li><a href="#details">ስለ ሥነ ሥርዓቱ</a></li>
+            <li><a href="#timeline">የዕለቱ ፕሮግራም</a></li>
+            <li><a href="#qr" class="rsvp-btn">📱 QR ያንቡ</a></li>
         </ul>
     </nav>
 
@@ -120,12 +120,12 @@
         <!-- Hero Section -->
         <section id="welcome" class="hero fade-in">
             <div class="glass-container">
-                <span class="orthodox-blessing">✞ ለእግዚአብሔር ክብር ይሁን ✞</span>
-                <span class="save-the-date">ሽምግልና ጋብቻ</span>
-                <h1 class="couple-names">ሬድኤት &amp; ሙሉቀን</h1>
+                <span class="orthodox-blessing">✞ ስለ እግዚአብሔር ፍቅር ✞</span>
+                <span class="save-the-date">ሽምግልና ሥነ ሥርዓት</span>
+                <h1 class="couple-names">ረድኤት አና ሙሉቀን</h1>
                 <div class="orthodox-divider">✞ ✞ ✞</div>
-                <p class="wedding-date">መስከረም ፲፭ ቀን ፳፻፲፱</p>
-                <p class="wedding-date-sub">September 25, 2026</p>
+                <p class="wedding-date">ቅዳሜ፣ መስከረም ፲፭ ቀን ፳፻፲፱ ዓ.ም</p>
+                <p class="wedding-date-sub">September 25, 2026 G.C.</p>
                 <div class="countdown-wrapper">
                     <div class="countdown-item"><span id="days">00</span><br>ቀናት</div>
                     <div class="countdown-item"><span id="hours">00</span><br>ሰዓት</div>
@@ -145,17 +145,34 @@
                 <h2>ስለ ሥነ ሥርዓቱ</h2>
                 <div class="details-grid">
                     <div class="detail-item">
-                        <h3>መቼ</h3>
-                        <p>ቅዳሜ፣ መስከረም ፲፭ ቀን ፳፻፲፱<br>ሥነ ሥርዓቱ የሚጀምረው ከሰአት ፲ ሰዓት ነው</p>
+                        <h3>📅 መቼ</h3>
+                        <p>ቅዳሜ፣ መስከረም ፲፭ ቀን ፳፻፲፱ ዓ.ም<br>ሥነ ሥርዓቱ የሚጀምረው ከጠዋቱ ፲ ሰዓት ነው<br><small
+                                style="opacity:0.7;">(10:00 AM — Ethiopian clock: ፬:00)</small></p>
                     </div>
                     <div class="detail-item">
-                        <h3>የት</h3>
-                        <p>ትልቁ የዝግጅት አዳራሽ<br>ቦሌ ክ/ከተማ፣ አዲስ አበባ<br>ኢትዮጵያ</p>
+                        <h3>📍 ቦታ</h3>
+                        <p>ሀብታሙ ኢቨንት ሆል<br>ቦሌ ክ/ከተማ፣ አዲስ አበባ<br>ኢትዮጵያ</p>
                     </div>
                     <div class="detail-item">
-                        <h3>የልብስ ዓይነት</h3>
-                        <p>ኢትዮጵያዊ ባህላዊ ልብስ<br>ወይም ፎርማል ልብስ</p>
+                        <h3>👗 የልብስ ዓይነት</h3>
+                        <p>ባህላዊ የኢትዮጵያ ልብስ<br>ወይም ፎርማል አለባበስ</p>
                     </div>
+                </div>
+
+                <!-- Embedded Map -->
+                <div class="map-wrapper">
+                    <div class="map-label">🗺️ ቦሌ፣ አዲስ አበባ — ቦታው ካርታ ላይ</div>
+                    <div class="map-frame">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3940.5279!2d38.7917!3d9.0105!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b85cef5ab402d%3A0x8467b6b037a24d49!2sBole%2C%20Addis%20Ababa%2C%20Ethiopia!5e0!3m2!1sen!2set!4v1700000000000"
+                            width="100%" height="320" style="border:0; border-radius: 12px;" allowfullscreen=""
+                            loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="ቦሌ፣ አዲስ አበባ ካርታ">
+                        </iframe>
+                    </div>
+                    <a href="https://www.google.com/maps/search/Bole,+Addis+Ababa,+Ethiopia" target="_blank"
+                        class="map-directions-btn">
+                        🚗 አቅጣጫ ያግኙ
+                    </a>
                 </div>
             </div>
         </section>
@@ -163,87 +180,103 @@
         <!-- Timeline Section -->
         <section id="timeline" class="timeline scale-in">
             <div class="glass-card">
-                <h2>የዕለቱ መርሃ ግብር</h2>
+                <h2>የዕለቱ ፕሮግራም</h2>
                 <ul class="timeline-list">
                     <li>
-                        <span class="time">ከሰ·ሰ ፲·፟00</span>
+                        <span class="time">ጠዋት ፲:00 (በኢትዮጵያ ሰዓት ፬:00)</span>
                         <div class="content">
-                            <h3>እንኳን ደህና መጡ</h3>
-                            <p>እንግዶችን ለመቀበል ቤተሰቦቹ ይቆማሉ።</p>
+                            <h3>እንግዶችን መቀበል</h3>
+                            <p>ሁለቱ ቤተሰቦች ተሰብስበው እንግዶቻቸውን በባህላዊ መንገድ ይቀበላሉ፤ ቅቤና ቃሪያ ይቀርባል።</p>
                         </div>
                     </li>
                     <li>
-                        <span class="time">ከሰ·ሰ ፲·፟30</span>
+                        <span class="time">ጠዋት ፲:30 (በኢትዮጵያ ሰዓት ፬:30)</span>
                         <div class="content">
-                            <h3>ሽምግልና ሥነ ሥርዓት</h3>
-                            <p>ሽማግሌዎቹ ቃለ ኪዳን ያደርጋሉ።</p>
+                            <h3>የሽምግልና ሥነ ሥርዓት</h3>
+                            <p>ሽማግሌዎቹ ሁለቱን ቤተሰቦች በሰላም ያስተናግዳሉ፤ የቃለ ኪዳን ሥርዓት ይፈጸማል።</p>
                         </div>
                     </li>
                     <li>
-                        <span class="time">ከሰ·ሰ ፲·፟2·30</span>
+                        <span class="time">ጠዋት ፲፩:፫0 (በኢትዮጵያ ሰዓት ፭:፫0)</span>
                         <div class="content">
-                            <h3>ጸሎትና ምርቃት</h3>
-                            <p>የቄስ ጸሎትና የሽማግሌዎቹ ምርቃት።</p>
+                            <h3>ጸሎት፣ ምርቃትና ቡርካ</h3>
+                            <p>የቤተ-ክርስቲያን ሊቀ-ካህናት ጸሎት ያደርጋሉ፤ ሽማግሌዎቹም ሐሴት የተሞላበት ምርቃት ይሰጣሉ።</p>
                         </div>
                     </li>
                     <li>
-                        <span class="time">ከሰ·ሰ ፲·፟3·00</span>
+                        <span class="time">ቀን ፲፪:00 (በኢትዮጵያ ሰዓት ፮:00)</span>
                         <div class="content">
-                            <h3>መዝሙር</h3>
-                            <p>የቀደሰ ዝማሬ፣ ብፁዕ ምርቃትና ቅዱስ ጸሎት።</p>
+                            <h3>ግብዣ — ምሳና ዝማሬ</h3>
+                            <p>ሁሉም እንግዶች በጋራ ምሳ ይበላሉ፤ ባህላዊ የኢትዮጵያ ሙዚቃና ዝማሬ ይቀርባል።</p>
                         </div>
                     </li>
                     <li>
-                        <span class="time">ምሽት ፮·00</span>
+                        <span class="time">ምሽት ፯:00 (በኢትዮጵያ ሰዓት ፩:00)</span>
                         <div class="content">
-                            <h3>መሸኘት</h3>
-                            <p>ቤተሰቦቻቸው ሙሽሮቹን ይሸኛሉ።</p>
+                            <h3>ሙሽሪቷን መሸኘት</h3>
+                            <p>የሙሽሪቷ ቤተሰቦች ሙሽሪቷን በክብር ይሸኛሉ፤ የሽምግልናው ሥርዓትም ይጠናቀቃል።</p>
                         </div>
                     </li>
                 </ul>
             </div>
         </section>
 
-        <!-- RSVP Section -->
-        <section id="rsvp" class="rsvp slide-up">
-            <div class="glass-container form-container">
-                <h2>ትመጣሉ?</h2>
-                <p>እባካችሁ እስከ ሐምሌ ፳፭ ቀን ምላሽ ይላኩ።</p>
-                <form id="rsvp-form">
-                    <div class="input-group">
-                        <label for="name">ሙሉ ስም</label>
-                        <input type="text" id="name" required placeholder="ለምሳሌ፦ አበበ ከበደ">
+        <!-- QR Code Section -->
+        <section id="qr" class="qr-section slide-up">
+            <div class="glass-container qr-container">
+                <h2>የምስጋና ካርዳችሁን ይቀበሉ</h2>
+                <p class="qr-subtitle">ይህንን QR ኮዱን በስልክዎ ካሜራ ቀይሞ ያነቡ — የምስጋና ካርዳችሁን ይቀበሉ!</p>
+
+                <div class="qr-card">
+                    <!-- Decorative corner ornaments -->
+                    <div class="qr-corner qr-corner--tl"></div>
+                    <div class="qr-corner qr-corner--tr"></div>
+                    <div class="qr-corner qr-corner--bl"></div>
+                    <div class="qr-corner qr-corner--br"></div>
+
+                    <div class="qr-inner-label">✞ የክብር ካርዳ ✞</div>
+
+                    <div class="qr-frame">
+                        <!--
+                            UPDATE the data= URL below to your real hosted thank-you page URL.
+                            Example: data=https%3A%2F%2Fyourdomain.com%2Fthank-you.html
+                        -->
+                        <img id="qr-img"
+                            src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&color=D4AF37&bgcolor=1a0202&data=https%3A%2F%2Fyour-site.com%2Fthank-you.html&qzone=2&format=svg"
+                            alt="QR Code — የክብር ካርዳ" class="qr-image" />
+                        <div class="qr-scan-line"></div>
                     </div>
-                    <div class="input-group">
-                        <label for="email">ኢሜይል</label>
-                        <input type="email" id="email" required placeholder="abebe@example.com">
-                    </div>
-                    <div class="input-group">
-                        <label>ምላሽዎ</label>
-                        <div class="radio-group">
-                            <label><input type="radio" name="attending" value="yes" required> በደስታ እቀበላለሁ</label>
-                            <label><input type="radio" name="attending" value="no"> ይቅርታ አልችልም</label>
+
+                    <div class="qr-instructions">
+                        <div class="qr-step">
+                            <span class="step-num">፩</span>
+                            <span>ስልክዎን ከፍቶ ካሜራ ያብቱ</span>
+                        </div>
+                        <div class="qr-step">
+                            <span class="step-num">፪</span>
+                            <span>ከፊት የሚደርሰውን QR ቡዱን የስልክዎን ካሜራ ግጹ ያስቀምጡ</span>
+                        </div>
+                        <div class="qr-step">
+                            <span class="step-num">፫</span>
+                            <span>የክብር ካርዳዎን ይቀበሉ!</span>
                         </div>
                     </div>
-                    <div class="input-group attending-only" id="guest-count-group" style="display: none;">
-                        <label for="guests">የሰው ብዛት</label>
-                        <select id="guests">
-                            <option value="1">፩ (እኔ ብቻ)</option>
-                            <option value="2">፪</option>
-                            <option value="3">፫</option>
-                            <option value="4">፬</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="submit-btn">ምላሽ ላክ</button>
-                    <div id="form-message" class="hidden-message"></div>
-                </form>
+
+                    <a href="thank-you.html" target="_blank" class="qr-direct-btn">
+                        🎁 ካርዳዉ ጋ አወርድ
+                    </a>
+                </div>
+
+                <p class="qr-note">ቀር ያሉዎ የብብልሰኬቸዉን QR ከትዓለሙ ይለዩቅርታን ሀሞ አቅርቡ ።</p>
             </div>
         </section>
+
 
     </main>
 
     <footer>
-        <p>✞ ለእግዚአብሔር ክብርና ምስጋና — ሬድኤት &amp; ሙሉቀን ቤተሰቦች ✞</p>
+        <p>✞ ለእግዚአብሔር ክብርና ምስጋና ✞</p>
+        <p style="font-size: 0.85rem; margin-top: 8px; opacity: 0.7;">የረድኤት እና የሙሉቀን ቤተሰቦች — አዲስ አበባ፣ ኢትዮጵያ</p>
     </footer>
 
     <script src="script.js"></script>
